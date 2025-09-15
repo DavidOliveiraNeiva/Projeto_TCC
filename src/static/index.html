@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Manager - Sistema de Gerenciamento de RPG</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-dice-d20"></i> RPG Manager</h1>
+            <p>Sistema de Gerenciamento de Campanhas de RPG</p>
+        </header>
+
+        <nav class="navigation">
+            <button class="nav-btn active" data-section="campanhas">
+                <i class="fas fa-flag"></i> Campanhas
+            </button>
+            <button class="nav-btn" data-section="personagens">
+                <i class="fas fa-user-friends"></i> Personagens
+            </button>
+            <button class="nav-btn" data-section="itens">
+                <i class="fas fa-sword"></i> Itens
+            </button>
+            <button class="nav-btn" data-section="missoes">
+                <i class="fas fa-scroll"></i> Missões
+            </button>
+            <button class="nav-btn" data-section="npcs">
+                <i class="fas fa-users"></i> NPCs
+            </button>
+            <button class="nav-btn" data-section="historico">
+                <i class="fas fa-history"></i> Histórico
+            </button>
+        </nav>
+
+        <main class="main-content">
+            <!-- Seção Campanhas -->
+            <section id="campanhas" class="content-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-flag"></i> Gerenciar Campanhas</h2>
+                    <button class="btn btn-primary" onclick="showModal('campanhaModal')">
+                        <i class="fas fa-plus"></i> Nova Campanha
+                    </button>
+                </div>
+                <div class="cards-grid" id="campanhas-list">
+                    <!-- Campanhas serão carregadas aqui -->
+                </div>
+            </section>
+
+            <!-- Seção Personagens -->
+            <section id="personagens" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-user-friends"></i> Gerenciar Personagens</h2>
+                    <select id="campanha-select-personagens" class="form-select">
+                        <option value="">Selecione uma campanha</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="showModal('personagemModal')">
+                        <i class="fas fa-plus"></i> Novo Personagem
+                    </button>
+                </div>
+                <div class="cards-grid" id="personagens-list">
+                    <!-- Personagens serão carregados aqui -->
+                </div>
+            </section>
+
+            <!-- Seção Itens -->
+            <section id="itens" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-sword"></i> Gerenciar Itens</h2>
+                    <select id="personagem-select-itens" class="form-select">
+                        <option value="">Selecione um personagem</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="showModal('itemModal')">
+                        <i class="fas fa-plus"></i> Novo Item
+                    </button>
+                </div>
+                <div class="cards-grid" id="itens-list">
+                    <!-- Itens serão carregados aqui -->
+                </div>
+            </section>
+
+            <!-- Seção Missões -->
+            <section id="missoes" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-scroll"></i> Gerenciar Missões</h2>
+                    <select id="campanha-select-missoes" class="form-select">
+                        <option value="">Selecione uma campanha</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="showModal('missaoModal')">
+                        <i class="fas fa-plus"></i> Nova Missão
+                    </button>
+                </div>
+                <div class="cards-grid" id="missoes-list">
+                    <!-- Missões serão carregadas aqui -->
+                </div>
+            </section>
+
+            <!-- Seção NPCs -->
+            <section id="npcs" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Gerenciar NPCs</h2>
+                    <select id="campanha-select-npcs" class="form-select">
+                        <option value="">Selecione uma campanha</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="showModal('npcModal')">
+                        <i class="fas fa-plus"></i> Novo NPC
+                    </button>
+                </div>
+                <div class="cards-grid" id="npcs-list">
+                    <!-- NPCs serão carregados aqui -->
+                </div>
+            </section>
+
+            <!-- Seção Histórico -->
+            <section id="historico" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-history"></i> Histórico de Sessões</h2>
+                    <select id="campanha-select-historico" class="form-select">
+                        <option value="">Selecione uma campanha</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="showModal('historicoModal')">
+                        <i class="fas fa-plus"></i> Nova Sessão
+                    </button>
+                </div>
+                <div class="cards-grid" id="historico-list">
+                    <!-- Histórico será carregado aqui -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modais -->
+    <div id="campanhaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-flag"></i> <span id="campanhaModalTitle">Nova Campanha</span></h3>
+                <span class="close" onclick="hideModal('campanhaModal')">&times;</span>
+            </div>
+            <form id="campanhaForm">
+                <input type="hidden" id="campanhaId">
+                <div class="form-group">
+                    <label for="nomeCampanha">Nome da Campanha:</label>
+                    <input type="text" id="nomeCampanha" required>
+                </div>
+                <div class="form-group">
+                    <label for="nomeMestre">Nome do Mestre:</label>
+                    <input type="text" id="nomeMestre" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="hideModal('campanhaModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
